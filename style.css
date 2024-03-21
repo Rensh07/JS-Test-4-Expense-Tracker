@@ -1,0 +1,433 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  height: 100vh;
+  font-weight: 400;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  background-color: #f5f5dc;
+  display: flex;
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid #bd8964;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logo {
+  height: 4.5rem;
+  width: 4.5rem;
+}
+
+.header h1 {
+  font-size: 3.2rem;
+  color: #8b4513;
+}
+
+/* Button */
+.btn {
+  background-color: #8b4513;
+  color: #fff;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  padding: 0.9rem 1rem;
+}
+
+.btn:hover {
+  background-color: #924f20;
+}
+
+/* Main Section */
+
+.main-section {
+  padding: 2rem 3rem;
+}
+
+/* Section 1 */
+.section-1 {
+  width: 100%;
+}
+
+.h3 {
+  color: #8b4513;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr 0.5fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.form input,
+.select {
+  border: 1px solid #bd8964;
+  border-radius: 5px;
+  padding: 0 1rem;
+  font-size: 2rem;
+  outline: none;
+}
+
+.form input:focus,
+.select:focus {
+  border: 2px solid #924f20;
+}
+
+/* Balance */
+
+.section-balance {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.balance {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.balance h3 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.balance p {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+/* Table Section */
+.table {
+  width: 100%;
+  border: 1px solid #bd8964;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.thead .tr-1 {
+  border-bottom: 1px solid #bd8964;
+  height: 4.8rem;
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.tr-1 th {
+  font-size: 1.8rem;
+  text-align: start;
+}
+
+.hidden {
+  display: none;
+}
+
+.tr-2 {
+  text-align: center;
+}
+
+.tr-2 h3 {
+  font-size: 2rem;
+  margin: 2rem 0;
+}
+
+.tr-new {
+  border-bottom: 1px solid #ffe9db;
+  height: 4.8rem;
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.tr-new:last-child {
+  border: none;
+}
+
+.tr-new td {
+  font-size: 1.4rem;
+  text-align: start;
+}
+
+.td-Income,
+.td-Expense {
+  background-color: green;
+  width: max-content;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+}
+
+.td-Expense {
+  background-color: red;
+}
+
+.btn-delete,
+.btn-edit {
+  padding: 0.5rem 1rem;
+  font-size: 1.4rem;
+}
+
+/********************* Media *********************/
+
+/* Below 915px  */
+
+@media (max-width: 57.19em) {
+  .header {
+    padding: 1.5rem 2rem;
+  }
+
+  .title {
+    gap: 1.5rem;
+  }
+
+  .logo {
+    height: 3.5rem;
+    width: 3.5rem;
+  }
+
+  .header h1 {
+    font-size: 2.8rem;
+  }
+
+  .main-section {
+    padding: 1.5rem 2rem;
+  }
+
+  .form {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .btn-add {
+    padding: 0.2rem 1rem;
+    font-size: 1.8rem;
+  }
+
+  .clear-all-data {
+    padding: 0.5rem 1rem;
+    font-size: 1.8rem;
+  }
+}
+
+/* Below 806px  */
+
+@media (max-width: 50.4em) {
+  .thead .tr-1,
+  .tr-new {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .tr-1 th {
+    font-size: 1.6rem;
+  }
+
+  .tr-new td,
+  .btn-delete,
+  .btn-edit {
+    font-size: 1.3rem;
+  }
+
+  .tr-2 h3 {
+    font-size: 1.7rem;
+    margin: 1.5rem 0;
+  }
+}
+
+/* Below 608px  */
+
+@media only screen and (max-width: 38em) {
+  .header {
+    padding: 1rem;
+  }
+
+  .title {
+    gap: 1rem;
+  }
+
+  .logo {
+    height: 3rem;
+    width: 3rem;
+  }
+
+  .header h1 {
+    font-size: 2.4rem;
+  }
+
+  .main-section {
+    padding: 1rem;
+  }
+
+  .form {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-add {
+    padding: 0.5rem 0;
+  }
+
+  .form input,
+  .select {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .table {
+    font-size: 1.4rem;
+  }
+
+  .thead .tr-1,
+  .tr-new {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .tr-1 th {
+    font-size: 1.4rem;
+  }
+
+  .tr-new td,
+  .btn-delete,
+  .btn-edit {
+    font-size: 1.1rem;
+  }
+
+  .balance h3,
+  .balance p,
+  .clear-all-data {
+    font-size: 1.6rem;
+  }
+
+  .tr-2 h3 {
+    font-size: 1.6rem;
+    margin: 1.4rem 0;
+  }
+}
+
+/* Below 536px  */
+
+@media only screen and (max-width: 33.5em) {
+  .thead .tr-1,
+  .tr-new {
+    grid-template-columns: repeat(5, 0.8fr);
+  }
+
+  .tr-1 th {
+    font-size: 1.3rem;
+  }
+
+  .tr-new td,
+  .btn-delete,
+  .btn-edit {
+    font-size: 1rem;
+  }
+
+  .td-Income,
+  .td-Expense,
+  .btn-delete,
+  .btn-edit {
+    padding: 0.4rem 0.8rem;
+  }
+
+  .balance h3,
+  .balance p,
+  .clear-all-data {
+    font-size: 1.5rem;
+  }
+
+  .tr-2 h3 {
+    font-size: 1.45rem;
+    margin: 1.2rem 0;
+  }
+}
+
+/* Below 469px  */
+
+@media only screen and (max-width: 29.313em) {
+  .thead .tr-1,
+  .tr-new {
+    grid-template-columns: repeat(5, 0.8fr);
+  }
+
+  .tr-1 th {
+    font-size: 1.2rem;
+  }
+
+  .tr-new td,
+  .btn-delete,
+  .btn-edit {
+    font-size: 0.9rem;
+  }
+
+  .td-Income,
+  .td-Expense,
+  .btn-delete,
+  .btn-edit {
+    padding: 0.35rem 0.7rem;
+  }
+
+  .balance h3,
+  .balance p,
+  .clear-all-data {
+    font-size: 1.4rem;
+  }
+
+  .tr-2 h3 {
+    font-size: 1.45rem;
+    margin: 1.2rem 0;
+  }
+}
+
+/* Below 423px  */
+
+@media only screen and (max-width: 26.44em) {
+  .td-Income,
+  .td-Expense,
+  .btn-delete,
+  .btn-edit {
+    padding: 0.3rem 0.5rem;
+  }
+
+  .tr-1 th {
+    font-size: 1.1rem;
+  }
+
+  .tr-new td,
+  .btn-delete,
+  .btn-edit {
+    font-size: 0.8rem;
+  }
+
+  .tr-2 h3 {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+  }
+}

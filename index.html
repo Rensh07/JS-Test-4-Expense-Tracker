@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script defer src="script.js"></script>
+    <title>Expense tracker</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="title">
+        <img class="logo" src="logo.png" alt="" />
+        <h1>Expense tracker</h1>
+      </div>
+    </header>
+    <section class="main-section">
+      <div class="section-1">
+        <h3 class="h3">Add Transaction</h3>
+        <form class="form">
+          <input class="name" type="text" name="name" placeholder="name" />
+          <input
+            class="amount"
+            type="number"
+            name="amount"
+            placeholder="amount"
+          />
+          <input class="date" type="date" name="date" />
+          <select class="category select" name="Category">
+            <option class="value-1" value="category" selected disabled>
+              Category
+            </option>
+            <option value="Income">Income</option>
+            <option value="Expense">Expense</option>
+          </select>
+          <button class="btn btn-add">ADD</button>
+        </form>
+      </div>
+      <div class="section-balance">
+        <button class="btn clear-all-data">Clear All Data</button>
+        <div class="balance">
+          <h3>Total Balance :</h3>
+          <p class="balance">₹</p>
+          <p class="total">0</p>
+        </div>
+      </div>
+      <div class="table-section">
+        <table class="table">
+          <thead class="thead">
+            <tr class="tr-1">
+              <th>Name</th>
+              <th>Amount</th>
+              <th>Date</th>
+              <th>Category</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody class="tbody">
+            <tr class="tr-2">
+              <td>
+                <h3>No Data found</h3>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </body>
+</html>
