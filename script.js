@@ -1,4 +1,3 @@
-// write javascript here
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -8,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const totalBalance = document.querySelector(".total");
   const clearButton = document.querySelector(".clear-all-data");
   let balance = 0;
+  let editMode = false;
+  let editedRow = null;
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -23,46 +24,77 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    if (name && amount && date && category) {
-      const rupeesAmount = `₹ ${amount}`;
+    if (editMode && editedRow) {
+      // Update existing row
+      const oldAmountString = editedRow.children[1].textContent.replace(
+        "₹",
+        ""
+      );
+      const oldAmount = parseFloat(oldAmountString);
+      const categoryBeforeEdit = editedRow.children[3].textContent;
 
-      // create row
+      editedRow.children[0].textContent = name;
+      editedRow.children[1].textContent = `₹ ${amount}`;
+      editedRow.children[2].textContent = date;
+      editedRow.children[3].textContent = category;
+
+      // Update balance
+      const categoryAfterEdit = category;
+      if (categoryBeforeEdit === "Income") {
+        balance -= oldAmount;
+      } else if (categoryBeforeEdit === "Expense") {
+        balance += oldAmount;
+      }
+
+      if (categoryAfterEdit === "Income") {
+        balance += amount;
+      } else if (categoryAfterEdit === "Expense") {
+        balance -= amount;
+      }
+      // Update total balance with the new balance
+      totalBalance.textContent = balance.toFixed(2);
+
+      // Clear edit mode
+      editMode = false;
+      editedRow = null;
+    } else {
+      // Create new row
+      const rupeesAmount = `₹ ${amount}`;
       const newRow = document.createElement("tr");
       newRow.innerHTML = `
-      <td>${name}</td>
-      <td>${rupeesAmount}</td>
-      <td>${date}</td>
-      <td class="td-${category}">${category}</td>
-      <td>
-        <button class="btn btn-edit">Edit</button>
-        <button class="btn btn-delete">Delete</button>
-      </td>
+        <td>${name}</td>
+        <td>${rupeesAmount}</td>
+        <td>${date}</td>
+        <td class="td-${category}">${category}</td>
+        <td>
+          <button class="btn btn-edit">Edit</button>
+          <button class="btn btn-delete">Delete</button>
+        </td>
       `;
       newRow.classList.add("tr-new");
 
       noDataFound.classList.add("hidden");
 
-      //add row
+      // Add new row
       tableBody.appendChild(newRow);
 
-      //Update total balance
+      // Update balance
       if (category === "Income") {
         balance += amount;
       } else if (category === "Expense") {
         balance -= amount;
       }
-
-      // Display balance
       totalBalance.textContent = balance.toFixed(2);
-
-      // clear fields
-      form.reset();
     }
+
+    // Clear form fields
+    form.reset();
   });
 
   // Edit button
   tableBody.addEventListener("click", function (e) {
     if (e.target.classList.contains("btn-edit")) {
+      editMode = true;
       const row = e.target.closest("tr");
       const name = row.children[0].textContent;
       const amountString = row.children[1].textContent.replace("₹", "");
@@ -70,28 +102,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const date = row.children[2].textContent;
       const category = row.children[3].textContent;
 
+      // Fill form with row data
       form.querySelector(".name").value = name;
       form.querySelector(".amount").value = amount;
       form.querySelector(".date").value = date;
       form.querySelector(".select").value = category;
 
-      // Update balance
-      if (category === "Income") {
-        balance -= amount;
-      } else if (category === "Expense") {
-        balance += amount;
-      }
-
-      // Display balance
-      totalBalance.textContent = balance.toFixed(2);
-
-      // Remove row
-      row.remove();
-
-      if (tableBody.children.length === 1) {
-        noDataFound.classList.remove("hidden");
-        tableBody.appendChild(noDataFound);
-      }
+      // Store edited row
+      editedRow = row;
     }
   });
 
@@ -99,23 +117,20 @@ document.addEventListener("DOMContentLoaded", function () {
   tableBody.addEventListener("click", function (e) {
     if (e.target.classList.contains("btn-delete")) {
       const row = e.target.closest("tr");
-      const amountString = row.children[1].textContent.replace("₹", ""); // Remove the Rupee symbol
+      const amountString = row.children[1].textContent.replace("₹", "");
       const amount = parseFloat(amountString);
 
       if (!isNaN(amount)) {
         const category = row.children[3].textContent;
 
-        // Update balance
         if (category === "Income") {
           balance -= amount;
         } else if (category === "Expense") {
           balance += amount;
         }
 
-        // Display balance
         totalBalance.textContent = balance.toFixed(2);
 
-        // Remove row
         row.remove();
 
         if (tableBody.children.length === 1) {
@@ -127,14 +142,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Clear all data
-
   clearButton.addEventListener("click", function () {
-    // Reset balance
     balance = 0;
     totalBalance.textContent = balance.toFixed(2);
-
-    // Remove all table rows
     const rows = tableBody.getElementsByTagName("tr");
+
     for (let i = rows.length - 1; i > 0; i--) {
       tableBody.removeChild(rows[i]);
     }
