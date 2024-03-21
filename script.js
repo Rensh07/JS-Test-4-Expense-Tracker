@@ -38,6 +38,10 @@ document.addEventListener("DOMContentLoaded", function () {
       editedRow.children[2].textContent = date;
       editedRow.children[3].textContent = category;
 
+      // Update category class
+      editedRow.children[3].classList.remove(`td-${categoryBeforeEdit}`);
+      editedRow.children[3].classList.add(`td-${category}`);
+
       // Update balance
       const categoryAfterEdit = category;
       if (categoryBeforeEdit === "Income") {
